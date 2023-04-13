@@ -9,12 +9,9 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
+    name = Column(String, unique=True, index=True, nullable=False)
     password = Column(String)
-    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
-# class Schedule(Base):
-#     __tablename__ = "schedule"
     
 
     

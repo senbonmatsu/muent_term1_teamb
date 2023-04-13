@@ -33,3 +33,13 @@ def signup(user: schema.UserCreate, db: Session = Depends(get_db)):
 
     new_user = crud.create_user(db=db, user=user)
     return new_user
+
+@app.post("/user/delete",tags=['user'])
+def delete(user_id:schema.User, db: Session=Depends(get_db)):
+    user_id_del = crud.read_user_by_id(db,user_id.id)
+    if user_id_del == None:
+        return {"message":"ユーザーが存在していません"}
+    else:
+        crud.delete_user_by_id(db,user_id.id)
+        return {"message":"ユーザーを削除しました"}
+    
