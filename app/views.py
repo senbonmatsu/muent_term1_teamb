@@ -1,3 +1,5 @@
+import calendar
+
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -43,3 +45,11 @@ def delete(user_id:schema.User, db: Session=Depends(get_db)):
         crud.delete_user_by_id(db,user_id.id)
         return {"message":"ユーザーを削除しました"}
     
+
+@app.get("/calender",tags=["calender"])
+def calender(year:int,month:int):
+    calendar.setfirstweekday(calendar.SUNDAY)
+    month_calender=calendar.monthcalendar(year,month)
+    return month_calender
+
+# gitCUIのテスト
