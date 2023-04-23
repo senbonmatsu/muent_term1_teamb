@@ -26,3 +26,9 @@ def read_user_by_name(db: Session, user_name: str):
     #指定したnameのUserを取得する
     user = db.query(models.User).filter(models.User.name == user_name).first()
     return user
+
+def delete_user_by_id(db: Session, user_id: int):
+    #指定したidのUserを削除
+    db.query(models.User).filter(models.User.id == user_id).delete()
+    db.commit()
+    return user_id
