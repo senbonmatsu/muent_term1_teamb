@@ -11,6 +11,11 @@ def create_user(db: Session, user: schema.UserCreate):
     return db_user
 
 
+def read_users(db: Session, offset: int = 0, limit: int = 100):
+    users = db.query(models.User).offset(offset).limit(limit).all()
+    return users
+
+
 def read_user_by_id(db: Session, user_id: int):
     # 指定idの読み取り
     user = db.query(models.User).filter(models.User.id == user_id).first()
