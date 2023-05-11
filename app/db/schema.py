@@ -16,6 +16,7 @@ class UserCreate(UserBase):
 class User(UserBase):
     #読み取り用
     id: int = Field(0, title="User ID")
+    created_at: datetime = Field(datetime.now(), title="Creation Date")
 
     class Config:
         orm_mode = True
