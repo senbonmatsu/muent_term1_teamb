@@ -71,4 +71,12 @@ class Note(Base):
 
     owner = relationship("shedule", back_populates="notes")
     
+class Todo(Base):    
+    __tablename__ = "todo"
 
+    id = Column(Integer, primary_key=True, index=True)
+    things = Column(String)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    label = Column(String)
+    date = Column(DateTime)
+    check = Column(Integer)
