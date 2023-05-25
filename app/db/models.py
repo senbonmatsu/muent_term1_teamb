@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy import Column, DateTime, Integer, String,Text
 
 from db.database import Base
 
@@ -13,6 +13,10 @@ class User(Base):
     password = Column(String)
     created_at = Column(DateTime,default = datetime.now(), nullable=False)
 
-    
+class Music(Base):
+    __tablename__ = "musics"
+    id = Column(Integer, primary_key=True )
+    music_name = Column(String, nullable=False)
+    url = Column(Text,nullable = False)
 
     
