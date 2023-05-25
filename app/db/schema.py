@@ -4,14 +4,17 @@ from pydantic import BaseModel, Field
 
 
 class UserBase(BaseModel):
-    name: str = Field(..., title="User Name")
+    #作成・読み取り用
+    name: str = Field(..., title="User Name")#バリデーション。説明
 
 
 class UserCreate(UserBase):
+    #作成用
     password: str = Field(..., title="Password")
 
 
 class User(UserBase):
+    #読み取り用
     id: int = Field(0, title="User ID")
     created_at: datetime = Field(datetime.now(), title="Creation Date")
 
