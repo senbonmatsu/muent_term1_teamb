@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import desc
 
 from db import models, schemas
+import random
 
 
 def create_user(db: Session, user: schemas.UserCreate):
@@ -92,3 +94,24 @@ def delete_todo_by_id(db: Session, todo_id: int):
     db.query(models.Todo).filter(models.User.id == todo_id).delete()
     db.commit()
     return todo_id
+
+def get_music_ids(db: Session,):
+    #音楽に登録してある中で一番大きいidを取得
+    max = db.query(models.Music.id).order_by(desc(models.Music.id)).first()
+    min = 1
+    return max,min
+
+def music_choice(db: Session,min: int,max: int):
+    #ランダムに選曲
+    random_id = random.randint(min,max)
+    music_chose = db.query(models.Music).filter(models.Music.id == random_id).one()
+    return music_chose
+
+def music_create(db: Session,music: schema.MusicBase):
+    add_music = models.Music(**music.dict())
+    print(f'music_dict{add_music}')
+    db.add(add_music)
+    db.commit()
+    db.refresh(add_music)
+    return add_music
+
