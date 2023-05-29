@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 
-from db import models, schemas
+from db import models, schema
 import random
 
 
-def create_user(db: Session, user: schemas.UserCreate):
+def create_user(db: Session, user: schema.UserCreate):
     db_user = models.User(**user.dict())
     db.add(db_user)
     db.commit()
@@ -35,7 +35,7 @@ def delete_user_by_id(db: Session, user_id: int):
     db.commit()
     return user_id
 
-def create_schedule(db: Session, schedule: schemas.ScheduleCreate, user_id: int):
+def create_schedule(db: Session, schedule: schema.ScheduleCreate, user_id: int):
     db_schedule = models.Schedule(**schedule.dict(), user_id=user_id)
     db.add(db_schedule)
     db.commit()
@@ -50,7 +50,7 @@ def read_schedule_by_id(db: Session, schedule_id: int):
     schdule = db.query(models.Schedule).filter(models.Schedule.id == schedule_id).first()
     return schdule
 
-def update_schedule(db: Session, schedule: schemas.Schedule):
+def update_schedule(db: Session, schedule: schema.Schedule):
     db_schedule = db.query(models.Schedule).filter(models.Schedule.id == schedule.id).first()
     db_schedule.things = schedule.things
     db_schedule.label = schedule.label
@@ -65,7 +65,7 @@ def delete_schedule_by_id(db: Session, schedule_id: int):
     db.commit()
     return schedule_id
 
-def create_todo(db: Session, todo: schemas.TodoCreate, user_id: int):
+def create_todo(db: Session, todo: schema.TodoCreate, user_id: int):
     db_todo = models.Todo(**todo.dict(), user_id=user_id)
     db.add(db_todo)
     db.commit()
@@ -80,7 +80,7 @@ def read_todo_by_id(db: Session, todo_id: int):
     todo = db.query(models.Todo).filter(models.Todo.id == todo_id).first()
     return todo
 
-def update_todo(db: Session, todo: schemas.Todo):
+def update_todo(db: Session, todo: schema.Todo):
     db_todo = db.query(models.Schedule).filter(models.Schedule.id == todo.id).first()
     db_todo.things = todo.things
     db_todo.label = todo.label
@@ -98,7 +98,9 @@ def delete_todo_by_id(db: Session, todo_id: int):
 def get_music_ids(db: Session,):
     #音楽に登録してある中で一番大きいidを取得
     max = db.query(models.Music.id).order_by(desc(models.Music.id)).first()
-    min = 1
+    min = db.query(models.Music.id).first()
+    max = max[0]
+    min = min[0]
     return max,min
 
 def music_choice(db: Session,min: int,max: int):
@@ -108,8 +110,9 @@ def music_choice(db: Session,min: int,max: int):
     return music_chose
 
 def music_create(db: Session,music: schema.MusicBase):
-    add_music = models.Music(**music.dict())
-    print(f'music_dict{add_music}')
+    add_music = models.Music()
+    add_music.music_name = music.music
+    add_music.url = music.url
     db.add(add_music)
     db.commit()
     db.refresh(add_music)
