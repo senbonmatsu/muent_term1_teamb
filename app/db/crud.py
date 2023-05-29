@@ -38,7 +38,9 @@ def delete_user_by_id(db: Session, user_id: int):
 def get_music_ids(db: Session,):
     #音楽に登録してある中で一番大きいidを取得
     max = db.query(models.Music.id).order_by(desc(models.Music.id)).first()
-    min = 1
+    min = db.query(models.Music.id).first()
+    max = max[0]
+    min = min[0]
     return max,min
 
 def music_choice(db: Session,min: int,max: int):
@@ -48,8 +50,9 @@ def music_choice(db: Session,min: int,max: int):
     return music_chose
 
 def music_create(db: Session,music: schema.MusicBase):
-    add_music = models.Music(**music.dict())
-    print(f'music_dict{add_music}')
+    add_music = models.Music()
+    add_music.music_name = music.music
+    add_music.url = music.url
     db.add(add_music)
     db.commit()
     db.refresh(add_music)
