@@ -29,9 +29,14 @@
       </div>
     </div>
   </div>
+  <div id="app">
+    <login />
+  </div>
 </template>
 
 <script>
+import login from "./login/login.vue";
+
 export default {
   data() {
     return {
@@ -130,6 +135,10 @@ export default {
       console.log(`Saved memo for row ${row}, col ${col}: ${memo}`);
     },
   },
+  name: "App",
+  components: {
+    login,
+  },
 };
 </script>
 
@@ -170,7 +179,6 @@ export default {
 .memo-row {
   position: relative;
 }
-
 
 
 .calendar {
