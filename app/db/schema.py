@@ -19,6 +19,7 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+        
 
 class  ScheduleBase(BaseModel):
     things : str = Field(..., title="Things")
@@ -69,3 +70,5 @@ class Music_read(MusicBase):
     id: int = Field(0,title="Music ID")
     class Config:
         orm_mode = True
+        
+
