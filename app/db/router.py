@@ -160,8 +160,8 @@ def update_schedule(schedule: schemas.Schedule, db: Session = Depends(get_db)):
     return new_schedule
 
 
-#@router.delete("/schedule/{user_id}", response_model=schemas.Schedule, tags=['schedule'])
-#def delete_schedule(chedule_id: int, db: Session = Depends(get_db)):
+@router.delete("/schedule/delete", response_model=schemas.Schedule, tags=['schedule'])
+def delete_schedule(schedule: schemas.Schedule, db: Session = Depends(get_db)):
     """
     Noteを削除する
 
@@ -178,13 +178,13 @@ def update_schedule(schedule: schemas.Schedule, db: Session = Depends(get_db)):
         空のNoteモデル
     """
 
-    db_schedule = crud.read_schedule_by_id(db=db, user_id=user_id)
+    db_schedule = crud.read_schedule_by_id(db=db, schedule_id=schedule.id)
     # ノートが存在しない場合は400エラーを返す
     if not db_schedule:
         raise HTTPException(
-            status_code=400, detail="Note does not exist")
+            status_code=400, detail="Schedule does not exist")
 
-    delete_schedule = crud.delete_schedule_by_id(db=db, user_id=user_id)
+    delete_schedule = crud.delete_schedule_by_id(db=db, schedule_id=schedule.id)
     return delete_schedule
 
 
@@ -238,8 +238,8 @@ def update_todo(todo: schemas.Todo, db: Session = Depends(get_db)):
     return new_todo
 
 
-#@router.delete("/todo/{user_id}", response_model=schemas.Todo, tags=['todo'])
-#def delete_todo(chedule_id: int, db: Session = Depends(get_db)):
+@router.delete("/todo/delete", response_model=schemas.Todo, tags=['todo'])
+def delete_note(todo: schemas.Todo, db: Session = Depends(get_db)):
     """
     Noteを削除する
 
@@ -256,11 +256,11 @@ def update_todo(todo: schemas.Todo, db: Session = Depends(get_db)):
         空のNoteモデル
     """
 
-    db_todo = crud.read_todo_by_id(db=db, user_id=user_id)
+    db_todo = crud.read_todo_by_id(db=db, todo_id=todo.id)
     # ノートが存在しない場合は400エラーを返す
     if not db_todo:
         raise HTTPException(
-            status_code=400, detail="Note does not exist")
+            status_code=400, detail="Todo does not exist")
 
-    delete_todo = crud.delete_todo_by_id(db=db, user_id=user_id)
+    delete_todo = crud.delete_todo_by_id(db=db, todo=todo)
     return delete_todo
