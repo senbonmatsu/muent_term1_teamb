@@ -59,3 +59,13 @@ class Todo(TodoBase):
     class Config:
         orm_mode = True
         
+class MusicBase(BaseModel):
+    #読み取り用、作成用
+    music: str = Field(...,title="Music title")
+    url : str = Field(...,title = "Music URL")
+
+class Music_read(MusicBase):
+    #読み取り用
+    id: int = Field(0,title="Music ID")
+    class Config:
+        orm_mode = True
