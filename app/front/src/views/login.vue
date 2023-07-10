@@ -1,4 +1,5 @@
 <template>
+  <div class="Login">
     <div v-if="loggedIn">
       <Calendar />
     </div>
@@ -11,7 +12,8 @@
       <button type="button" @click="goToSignup" class="signup-button">新規登録</button>
       <p v-if="message" class="message">{{ message }}</p>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import axios from 'axios';
