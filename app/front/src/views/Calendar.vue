@@ -140,7 +140,7 @@
   <style scoped>
   
   button{
-    margin: 0 230px;
+    margin: 0 140px;
     padding:10px 15px;
     font-size: 20px;
     border: none;
@@ -187,7 +187,6 @@
   }
   
   .calendar {
-    padding: 0px 190px;
     font-family: Arial, sans-serif;
   }
   
