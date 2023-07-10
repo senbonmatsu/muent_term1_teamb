@@ -3,8 +3,7 @@ import calendar
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
-import crud
-from db import schema
+from db import schema,crud
 from db.database import get_db
 from db.models import User
 from main import Users_type, app
@@ -52,4 +51,14 @@ def calender(year:int,month:int):
     month_calender=calendar.monthcalendar(year,month)
     return month_calender
 
-# gitCUIのテスト
+@app.get("/get_music",tags=["music"])
+def music(db:Session=Depends(get_db)):
+    # 音楽名とurlを送る内容を記述
+    max,min = crud.get_music_ids(db)
+    musics = crud.music_choice(db,min,max)
+    return {"music_name":musics.music_name,"music_url":musics.url}
+
+@app.post("/create_musics",tags=["music"])
+def create_music(create_m :schema.MusicBase,db:Session=Depends(get_db)):
+    crud.music_create(db,create_m)
+    return {"message":"楽曲を追加しました"}

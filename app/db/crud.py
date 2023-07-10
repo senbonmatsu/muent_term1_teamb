@@ -1,6 +1,10 @@
 from sqlalchemy.orm import Session
 
 from db import models, schema
+<<<<<<< HEAD:app/crud.py
+=======
+import random
+>>>>>>> 3e2f51634b07cebd76ae0f1627df525628cab15d:app/db/crud.py
 
 
 def create_user(db: Session, user: schema.UserCreate):
@@ -91,4 +95,32 @@ def delete_todo_by_id(db: Session, todo_id: int):
     #指定したidのUserを削除
     db.query(models.Todo).filter(models.User.id == todo_id).delete()
     db.commit()
+<<<<<<< HEAD:app/crud.py
     return todo_id
+=======
+    return todo_id
+
+def get_music_ids(db: Session,):
+    #音楽に登録してある中で一番大きいidを取得
+    max = db.query(models.Music.id).order_by(desc(models.Music.id)).first()
+    min = db.query(models.Music.id).first()
+    max = max[0]
+    min = min[0]
+    return max,min
+
+def music_choice(db: Session,min: int,max: int):
+    #ランダムに選曲
+    random_id = random.randint(min,max)
+    music_chose = db.query(models.Music).filter(models.Music.id == random_id).one()
+    return music_chose
+
+def music_create(db: Session,music: schema.MusicBase):
+    add_music = models.Music()
+    add_music.music_name = music.music
+    add_music.url = music.url
+    db.add(add_music)
+    db.commit()
+    db.refresh(add_music)
+    return add_music
+
+>>>>>>> 3e2f51634b07cebd76ae0f1627df525628cab15d:app/db/crud.py

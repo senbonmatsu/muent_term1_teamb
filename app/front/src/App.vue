@@ -10,11 +10,11 @@ import Calendar from './components/Calendar.vue';
 export default {
   name: 'App',
   components: {
-    Calendar
-  }
-}
+    Calendar,
+  },
+};
 </script>
 
 <style>
-/* スタイルの定義 */
+/* スタイルをここに追加する */
 </style>
