@@ -5,12 +5,9 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import Calendar from '../views/Calendar.vue';
-import Login from '../views/login.vue';
-=======
-import Calendar from './components/Calendar.vue';
->>>>>>> parent of da9e3a4 (front変更)
+
+import Calendar from './views/Calendar.vue';
+import Login from './views/login.vue';
 
 export default {
   name: 'App',
