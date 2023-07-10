@@ -1,33 +1,21 @@
 <template>
   <div id="app">
-    <template v-if="loggedIn">
-      <Calendar />
-    </template>
-    <template v-else>
-      <Login @login="handleLogin" />
-    </template>
+    <Calendar />
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import Calendar from '../views/Calendar.vue';
 import Login from '../views/login.vue';
+=======
+import Calendar from './components/Calendar.vue';
+>>>>>>> parent of da9e3a4 (front変更)
 
 export default {
   name: 'App',
   components: {
     Calendar,
-    Login,
-  },
-  data() {
-    return {
-      loggedIn: false,
-    };
-  },
-  methods: {
-    handleLogin() {
-      this.loggedIn = true;
-    },
   },
 };
 </script>
