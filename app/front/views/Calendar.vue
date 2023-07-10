@@ -86,10 +86,14 @@ export default {
   },
   methods: {
     previousWeek() {
-      this.currentWeek.setDate(this.currentWeek.getDate() - 7);
+      const nextWeek = new Date(this.currentWeek);
+      nextWeek.setDate(nextWeek.getDate() - 7);
+      this.currentWeek = nextWeek;
     },
     nextWeek() {
-      this.currentWeek.setDate(this.currentWeek.getDate() + 7);
+      const nextWeek = new Date(this.currentWeek);
+      nextWeek.setDate(nextWeek.getDate() + 7);
+      this.currentWeek = nextWeek;
     },
     selectDate(date) {
       console.log('選択された日付:', date);
@@ -135,6 +139,17 @@ export default {
 
 <style scoped>
 
+button{
+  margin: 0 230px;
+  padding:10px 15px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+h2{
+  font-size: 40px;
+}
 .memo-section {
   display: flex;
   flex-direction: column;
@@ -171,9 +186,8 @@ export default {
   position: relative;
 }
 
-
-
 .calendar {
+  padding: 0px 190px;
   font-family: Arial, sans-serif;
 }
 
@@ -185,6 +199,7 @@ export default {
 }
 
 table {
+  
   width: 100%;
   border-collapse: collapse;
 }

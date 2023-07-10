@@ -4,11 +4,10 @@
     </div>
     <div v-else class="notebook">
       <!-- ログインフォームを表示 -->
-      <h1>ログイン</h1>
-      <input v-model="username_form" placeholder="ユーザー名" />
-      <input v-model="password_form" type="password" placeholder="パスワード" />
-      <button type="button" @click="login" class="login-button">ログイン</button>
-      <button type="button" @click="goToSignup" class="signup-button">新規登録</button>
+      <h1>新規登録</h1>
+      <input v-model="username_form" placeholder="新規ユーザー名" />
+      <input v-model="password_form" type="password" placeholder="新規パスワード" />
+      <button type="button" @click="sign_up">新規登録</button>
       <p v-if="message" class="message">{{ message }}</p>
     </div>
   </template>
@@ -27,29 +26,26 @@
       };
     },
     methods: {
-      // login() {
-      //   axios
-      //     .post('/user/login', {
-      //       name: this.username_form,
-      //       password: this.password_form,
-      //     })
-      //     .then((res) => {
-      //       console.log(res.data);
-      //       this.message = 'ログインに成功しました。';
-      //       // ログイン成功時に認証情報を保存する
-      //       localStorage.setItem('token', res.data.token);
-      //       localStorage.setItem('user', JSON.stringify(res.data.user));
-      //       this.loggedIn = true; // ログイン状態を更新
-      //       // ログイン成功後の処理を追加
-      //       window.location.reload(); // ページをリロード
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //       this.message = 'ログインに失敗しました。';
-      //     });
-      // },
+    //   sign_up() {
+        //   axios
+        //     .post('/user/signup', {
+        //       name: this.username_form,
+        //       password: this.password_form
+        //     })
+        //     .then(res => {
+        //       console.log(res.data);
+        //       this.message = '新規登録に成功しました。';
+        //       this.loggedIn = true; // ログイン状態を更新
+        //       // 新規登録成功後の処理を追加
+        //       this.$router.push('/calendar'); // Vue Routerを使用してページ遷移
+        //     })
+        //     .catch(err => {
+        //       console.log(err);
+        //       this.message = '新規登録に失敗しました。';
+        //     });
+        // },
 
-        login() {
+          sign_up() {
             // ログイン成功のダミーレスポンスを設定
             const dummyResponse = {
                 id: 1,
@@ -58,18 +54,15 @@
 
             this.message = 'ログインに成功しました。';
             this.loggedIn = true;
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('user', JSON.stringify(res.data.user));
-            window.location.reload(); // ページをリロード
+            // ログイン後の処理
+            // ここで必要なデータを取得したり、リダイレクトしたりする
+
+            // 例えば、ログイン成功後に views/Calendar.vue を表示する場合
             this.$router.push('/calendar'); // Vue Router を使用してページ遷移
 
             // または、コンポーネントをダイナミックに表示する場合
             // this.$emit('loginSuccess', dummyResponse); // イベントを発火して親コンポーネントで処理する
         },
-        goToSignup() {
-            this.$router.push('/signup'); // Vue Router を使用してページ遷移
-        },
-
     },
     components: {
       Calendar,
@@ -98,7 +91,7 @@
     border-radius: 5px;
     border: 1px solid #ccc;
   }
-  button.login-button {
+  button {
     width: 100%;
     padding: 10px;
     background-color: #4caf50;
@@ -106,17 +99,10 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    }
+  }
   .message {
     text-align: center;
     margin-top: 10px;
   }
-  button.signup-button {
-    width: 100%;
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    }
   </style>
   
