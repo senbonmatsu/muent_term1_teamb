@@ -1,8 +1,10 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
 
 from db import models, schema
+<<<<<<< HEAD:app/crud.py
+=======
 import random
+>>>>>>> 3e2f51634b07cebd76ae0f1627df525628cab15d:app/db/crud.py
 
 
 def create_user(db: Session, user: schema.UserCreate):
@@ -93,6 +95,9 @@ def delete_todo_by_id(db: Session, todo_id: int):
     #指定したidのUserを削除
     db.query(models.Todo).filter(models.User.id == todo_id).delete()
     db.commit()
+<<<<<<< HEAD:app/crud.py
+    return todo_id
+=======
     return todo_id
 
 def get_music_ids(db: Session,):
@@ -118,3 +123,4 @@ def music_create(db: Session,music: schema.MusicBase):
     db.refresh(add_music)
     return add_music
 
+>>>>>>> 3e2f51634b07cebd76ae0f1627df525628cab15d:app/db/crud.py
