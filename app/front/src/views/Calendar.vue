@@ -151,6 +151,7 @@
     font-size: 40px;
   }
   .memo-section {
+    margin-bottom:50px;
     display: flex;
     flex-direction: column;
     align-items: center;
